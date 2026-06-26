@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import HostelCard from '../components/HostelCard';
-
+import API_URL from '../config';
 const Favourites = () => {
   const { user, token } = useAuth();
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Favourites = () => {
 
   const fetchFavourites = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/favourites', {
+      const res = await axios.get('${API_URL}/api/favourites', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setFavourites(res.data);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-
+import API_URL from '../config';
 const AdminPanel = () => {
   const { user, token } = useAuth();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const AdminPanel = () => {
   }, [user, navigate]);
   const fetchHostels = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/hostels');
+      const res = await axios.get('${API_URL}/api/hostels');
       setHostels(res.data);
     } catch (err) {
       console.error(err);
@@ -43,7 +43,7 @@ const AdminPanel = () => {
   try {
     const formData = new FormData();
     formData.append('image', file);
-    const res = await axios.post('http://localhost:5000/api/upload', formData, {
+    const res = await axios.post('${API_URL}/api/upload', formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
@@ -73,14 +73,14 @@ const AdminPanel = () => {
       };
       if (editingHostel) {
         await axios.put(
-          `http://localhost:5000/api/hostels/${editingHostel._id}`,
+          `${API_URL}/api/hostels/${editingHostel._id}`,
           submitData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setMsg('Hostel updated successfully! ✅');
       } else {
         await axios.post(
-          'http://localhost:5000/api/hostels',
+          '${API_URL}/api/hostels',
           submitData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -117,7 +117,7 @@ const AdminPanel = () => {
     if (!window.confirm('Are you sure you want to delete this hostel?')) return;
     try {
       await axios.delete(
-        `http://localhost:5000/api/hostels/${id}`,
+        `${API_URL}/api/hostels/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setMsg('Hostel deleted! ✅');

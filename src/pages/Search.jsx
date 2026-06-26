@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import HostelCard from '../components/HostelCard';
-
+import API_URL from '../config';
 const Search = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -37,7 +37,7 @@ const Search = () => {
       if (filters.ac) query.append('ac', 'true');
       if (filters.laundry) query.append('laundry', 'true');
 
-      const res = await axios.get(`http://localhost:5000/api/hostels?${query}`);
+      const res = await axios.get(`${API_URL}/api/hostels?${query}`);
       setHostels(res.data);
     } catch (err) {
       console.error(err);

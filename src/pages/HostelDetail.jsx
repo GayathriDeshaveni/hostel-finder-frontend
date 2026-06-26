@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import API_URL from '../config';
 
 const HostelDetail = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const HostelDetail = () => {
   useEffect(() => {
     const fetchHostel = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/hostels/${id}`);
+        const res = await axios.get(`${API_URL}/api/hostels/${id}`);
         setHostel(res.data);
       } catch (err) {
         console.error("Error fetching hostel:", err.message);
@@ -31,7 +32,7 @@ const HostelDetail = () => {
     }
     try {
       await axios.post(
-        `http://localhost:5000/api/favourites/${id}`,
+        `${API_URL}/api/favourites/${id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );
