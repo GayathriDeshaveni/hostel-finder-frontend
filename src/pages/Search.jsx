@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import HostelCard from '../components/HostelCard';
 import API_URL from '../config';
+
 const Search = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -20,15 +21,14 @@ const Search = () => {
     laundry: false,
   });
 
-  const fetchHostels = async () => {
+  const fetchHostels = useCallback(async () => {
     setLoading(true);
     try {
       const query = new URLSearchParams();
-    
       if (search) {
-  query.append('city', search);
-  query.append('college', search);
-}
+        query.append('city', search);
+        query.append('college', search);
+      }
       if (filters.gender) query.append('gender', filters.gender);
       if (filters.minPrice) query.append('minPrice', filters.minPrice);
       if (filters.maxPrice) query.append('maxPrice', filters.maxPrice);
@@ -43,11 +43,11 @@ const Search = () => {
       console.error(err);
     }
     setLoading(false);
-  };
+  }, [search, filters]);
 
   useEffect(() => {
     fetchHostels();
-  }, []);
+  }, [fetchHostels]);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">

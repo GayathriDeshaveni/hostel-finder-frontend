@@ -20,7 +20,7 @@ const Login = () => {
     setLoading(true);
     setError('');
     try {
-      const res = await axios.post('${API_URL}/api/auth/login', form);
+      const res = await axios.post(`${API_URL}/api/auth/login`, form);
       login(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
