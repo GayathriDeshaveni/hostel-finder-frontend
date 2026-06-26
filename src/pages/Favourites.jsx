@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import HostelCard from '../components/HostelCard';
 import API_URL from '../config';
+
 const Favourites = () => {
   const { user, token } = useAuth();
   const navigate = useNavigate();
   const [favourites, setFavourites] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchFavourites = async () => {
+  const fetchFavourites = useCallback(async () => {
     try {
-      const res = await axios.get('${API_URL}/api/favourites', {
+      const res = await axios.get(`${API_URL}/api/favourites`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setFavourites(res.data);
@@ -20,7 +21,7 @@ const Favourites = () => {
       console.error(err);
     }
     setLoading(false);
-  };
+  }, [token]);
 
   useEffect(() => {
     if (!user) {
@@ -28,7 +29,7 @@ const Favourites = () => {
       return;
     }
     fetchFavourites();
-  }, [user]);
+  }, [user, navigate, fetchFavourites]);
 
   if (loading) return <div className="text-center py-20 text-gray-500">Loading...</div>;
 

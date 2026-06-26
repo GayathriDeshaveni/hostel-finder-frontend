@@ -29,7 +29,7 @@ const AdminPanel = () => {
   }, [user, navigate]);
   const fetchHostels = async () => {
     try {
-      const res = await axios.get('${API_URL}/api/hostels');
+      const res = await axios.get(`${API_URL}/api/hostels`);
       setHostels(res.data);
     } catch (err) {
       console.error(err);
@@ -43,7 +43,7 @@ const AdminPanel = () => {
   try {
     const formData = new FormData();
     formData.append('image', file);
-    const res = await axios.post('${API_URL}/api/upload', formData, {
+    const res = await axios.post(`${API_URL}/api/upload`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
@@ -80,7 +80,7 @@ const AdminPanel = () => {
         setMsg('Hostel updated successfully! ✅');
       } else {
         await axios.post(
-          '${API_URL}/api/hostels',
+          `${API_URL}/api/hostels`,
           submitData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
