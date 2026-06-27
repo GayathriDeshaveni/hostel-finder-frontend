@@ -1,6 +1,6 @@
 # 🏠 HostelFinder
 
-A full-stack web application that helps students find verified hostels near their college — with smart search, filters, and a clean OYO-style UI.
+A full-stack web application that helps students find verified hostels near their college — with smart search, filters, and a clean style UI.
 
 ## 🌐 Live Demo
 👉 [https://hostel-finder-frontend-one.vercel.app](https://hostel-finder-frontend-one.vercel.app)
