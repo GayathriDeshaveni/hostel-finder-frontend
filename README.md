@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# 🏠 HostelFinder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web application that helps students find verified hostels near their college — with smart search, filters, and a clean OYO-style UI.
 
-## Available Scripts
+## 🌐 Live Demo
+👉 [https://hostel-finder-frontend-one.vercel.app](https://hostel-finder-frontend-one.vercel.app)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## ✨ Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 🔍 **Search** hostels by city or college name
+- 🎛️ **Filter** by gender, price range, and amenities (WiFi, Food, AC, Laundry)
+- 🏠 **Hostel Detail Page** with images, amenities, contact info
+- ❤️ **Save Favourites** (login required)
+- 🔐 **JWT Authentication** (Register/Login)
+- 👨‍💼 **Admin Panel** — Add, Edit, Delete hostels with image upload
+- 🖼️ **Cloudinary** image upload for hostel photos
+- ⭐ **Star Ratings** for hostels
+- 📱 **Responsive UI** — OYO/MakeMyTrip inspired design
 
-### `npm test`
+## 🛠️ Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
+- React.js
+- Tailwind CSS
+- Axios
+- React Router DOM
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Backend
+- Node.js + Express.js
+- MongoDB Atlas + Mongoose
+- JWT Authentication
+- Cloudinary (image upload)
+- Multer
 
 ### Deployment
+- Frontend → Vercel
+- Backend → Render
+- Database → MongoDB Atlas
+- Images → Cloudinary
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🚀 Getting Started
 
-### `npm run build` fails to minify
+### Prerequisites
+- Node.js
+- MongoDB Atlas account
+- Cloudinary account
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Backend Setup
+```bash
+cd hostel-finder-backend
+npm install
+```
+
+Create `.env` file:
+```
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+Run backend:
+```bash
+npm run dev
+```
+
+### Frontend Setup
+```bash
+cd hostel-finder-frontend
+npm install
+```
+
+Create `.env` file:
+```
+REACT_APP_API_URL=http://localhost:5000
+SKIP_PREFLIGHT_CHECK=true
+```
+
+Run frontend:
+```bash
+npm start
+```
+
+## 📁 Project Structure
+
+```
+hostel-finder-backend/
+├── config/         # Database connection
+├── middleware/     # JWT auth middleware
+├── models/         # User & Hostel models
+├── routes/         # API routes
+└── server.js
+
+hostel-finder-frontend/
+├── src/
+│   ├── components/ # Navbar, HostelCard, Footer
+│   ├── context/    # Auth context
+│   ├── pages/      # Home, Search, Detail, Admin
+│   └── config.js   # API URL config
+```
+
+## 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /api/auth/register | Register user |
+| POST | /api/auth/login | Login user |
+| GET | /api/hostels | Get all hostels (with filters) |
+| GET | /api/hostels/:id | Get single hostel |
+| POST | /api/hostels | Add hostel (admin) |
+| PUT | /api/hostels/:id | Update hostel (admin) |
+| DELETE | /api/hostels/:id | Delete hostel (admin) |
+| GET | /api/favourites | Get user favourites |
+| POST | /api/favourites/:id | Add to favourites |
+| DELETE | /api/favourites/:id | Remove from favourites |
+| POST | /api/upload | Upload image to Cloudinary |
+
+## 👩‍💻 Developer
+
+**Gayathri Deshaveni**
+- GitHub: [@GayathriDeshaveni](https://github.com/GayathriDeshaveni)
+
